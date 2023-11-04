@@ -1,0 +1,6 @@
+fdf
+*.o
+*.a
+*.zip
+*.tgz
+resource/minilibx
