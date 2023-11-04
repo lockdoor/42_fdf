@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:11:31 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/03 16:32:27 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/04 14:08:30 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	fdf_exit_error(char *strerr, int error_code)
 {
-	perror (strerr);
+	ft_putstr_fd (strerr, 2);
 	exit (error_code);
 }

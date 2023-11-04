@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:22:31 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/03 16:16:59 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/04 10:31:44 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,3 @@ void	fdf_free_split(void *data)
 	data = NULL;
 }
 
-void	fdf_free_data(t_fdf *fdf)
-{
-	size_t	i;
-	size_t	size;
-
-	if (!fdf->data)
-		return ;
-	i = 0;
-	size = fdf->data_col * fdf->data_row;
-	while (i < size)
-	{
-		free (fdf->data[i]);
-		fdf->data[i] = NULL;
-		i++ ;
-	}
-	free (fdf->data);
-	fdf->data = NULL;
-}

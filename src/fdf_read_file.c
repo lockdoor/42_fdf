@@ -6,154 +6,140 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:50:12 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/04 07:31:20 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/04 14:41:52 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-static void	fdf_count_col_row(t_fdf *fdf, char **argv, int fd)
-{
-	char	**split;
-	char	*line;
-
-	line = get_next_line(fd);
-	if (line)
-	{
-		fdf->data_row = 1;
-		split = ft_split(line, 32);
-		if (!split)
-		{
-			free (line);
-			close (fd);
-			fdf_exit_error (argv[0], fdf, EXIT_FAILURE);
-		}
-		fdf->data_col = 0;
-		while (split[fdf->data_col])
-			fdf->data_col += 1;
-		fdf_free_split (split);
-		free (line);
-	}
-	while (TRUE)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		fdf->data_row += 1;	
-		free (line);
-	}
-}
-*/
-
 static void	fdf_count_row(t_fdf *fdf, int fd)
 {
 	char	*line;
 
-	if (!fdf->data_col)
-	{
-		close (fd);
-		fdf_exit_error ("No data found.", EXIT_FAILURE);
-	}
-	fdf->data_row = 1;
+	fdf->row = 1;
 	while (TRUE)
 	{
 		line = get_next_line (fd);
 		if (line == NULL)
 			break ;	
-		fdf->data_row += 1;
+		fdf->row += 1;
 		free (line);
 	}
 	close (fd);
-	if (!fdf->data_row)
-		fdf_exit_error ("No data found.", EXIT_FAILURE);
 }
 
-static void	fdf_count_col(t_fdf *fdf, char **argv)
+static void	fdf_count_col(t_fdf *fdf)
 {
 	int		fd;
 	char	**split;
 	char	*line;
 
-	fd = open (argv[1], O_RDONLY);
+	fd = open (fdf->filename, O_RDONLY);
 	if (fd == -1)
-		fdf_exit_error (argv[1], EXIT_FAILURE);
+		fdf_exit_error (INVALID_FILE, EXIT_FAILURE);
 	line = get_next_line(fd);
 	if (!line)
 	{
 		close (fd);	
-		fdf_exit_error ("No data found.", EXIT_FAILURE);
+		fdf_exit_error (NO_DATA, EXIT_FAILURE);
 	}
 	split = ft_split(line, 32);
 	free (line);
 	if (!split)
 	{
 		close (fd);
-		fdf_exit_error (argv[0], EXIT_FAILURE);
+		fdf_exit_error (MALLOC_ERROR, EXIT_FAILURE);
 	}
-	fdf->data_col = 0;
-	while (split[fdf->data_col])
-		fdf->data_col += 1;
+	fdf->col = 0;
+	while (split[fdf->col])
+		fdf->col += 1;
 	fdf_free_split (split);
 	fdf_count_row (fdf, fd);
 }
 
-// static void fdf_add_data(t_fdf *fdf, char **argv, int fd)
-// {
-// 	(void)	argv;
-// 	char	*line;
-// 	char	**split;
-// 	size_t	i;
-// 	size_t	j;
-
-// 	i = 0;
-// 	while (i < fdf->data_row)
-// 	{
-// 		/*protect this*/
-// 		line = get_next_line(fd);
-// 		/*protect this*/
-// 		split = ft_split(line, 32);
-// 		free (line);
-// 		j = 0;
-// 		while (j < fdf->data_col)
-// 		{
-// 			/*protect this*/
-// 			fdf->data[(i * fdf->data_col) + j] = malloc (sizeof(int) * 2);
-// 			fdf->data[(i * fdf->data_col) + j][0] =  ft_atoi (split[j]);
-// 			j++ ;
-// 		}
-// 		fdf_free_split (split);
-// 		i++ ;
-// 	}
-// }
-
-
-
-
-
-void	fdf_read_file (t_fdf *fdf, char **argv)
+static void fdf_add_col(char *line, t_fdf *fdf, size_t row, int fd)
 {
-	// int fd;
+	char	**split;
+	size_t	col;
 
+	split = ft_split(line, 32);
+	free (line);
+	if (!split)
+	{
+		close (fd);
+		free (fdf->data);
+		fdf_exit_error (MALLOC_ERROR, EXIT_FAILURE);
+	}
+	col = 0;
+	while (col < fdf->col)
+	{
+		if (split[col] == NULL)
+		{
+			close (fd);
+			free (fdf->data);
+			fdf_exit_error (WRONG_LINE, EXIT_FAILURE);
+		}
+		fdf->data[(row * fdf->col) + col].adj = ft_atoi (split[col]);
+		col++ ;
+	}
+	fdf_free_split (split);	
+}
+
+static void fdf_rm_newline(char *line)
+{
+	char	*nl;
+
+	nl = ft_strrchr(line, '\n');
+	if (nl)
+		*nl = 0;
+}
+
+static void fdf_add_data(t_fdf *fdf)
+{
+	int		fd;
+	char	*line;
+	size_t	row;
+
+	fd = open (fdf->filename, O_RDONLY);
+	if (fd == -1)
+	{
+		free (fdf->data);
+		fdf_exit_error (INVALID_FILE, EXIT_FAILURE);
+	}
+	row = 0;
+	while (row < fdf->row)
+	{
+		line = get_next_line(fd);
+		if (!line)
+		{
+			close (fd);
+			free (fdf->data);
+			fdf_exit_error (fdf->filename, EXIT_FAILURE);
+		}
+		fdf_rm_newline (line);
+		fdf_add_col (line, fdf, row, fd);
+		row++ ;
+	}
+	close (fd);
+}
+
+void	fdf_read_file (t_fdf *fdf)
+{
 	/* count stage */
-	fdf_count_col (fdf, argv);
-	// fdf_count_row (fdf, argv);
+	fdf_count_col (fdf);
 	
 	/* debug */
-	ft_printf ("row: %d, col: %d\n", fdf->data_row, fdf->data_col);
+	// ft_printf ("row: %d, col: %d\n", fdf->row, fdf->col);
 	
 	// /* malloc stage */
-	// fdf->data = malloc (fdf->data_col * fdf->data_row * sizeof(int *));
-	// if (!fdf->data)
-	// 	fdf_exit_error (argv[0], EXIT_FAILURE);
+	fdf->data = malloc (fdf->col * fdf->row * sizeof(t_fdata));
+	if (!fdf->data)
+		fdf_exit_error (MALLOC_ERROR, EXIT_FAILURE);
 
 	// /* add data stage */
-	// fd = open (argv[1], O_RDONLY);
-	// if (fd == -1)
-	// 	fdf_exit_error (argv[1], EXIT_FAILURE);
-	// fdf_add_data (fdf, argv, fd);
-	// close (fd);
+	fdf_add_data (fdf);
 
 	// print_data_debug (fdf);
-	// fdf_free_data (fdf);
+
+	// free (fdf->data);
 }
