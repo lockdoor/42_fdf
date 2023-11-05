@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_utils.c                                        :+:      :+:    :+:   */
+/*   fdf_key_hook.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 11:11:31 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/05 10:57:28 by pnamnil          ###   ########.fr       */
+/*   Created: 2023/11/05 10:21:57 by pnamnil           #+#    #+#             */
+/*   Updated: 2023/11/05 10:22:29 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	fdf_exit_error(char *strerr, int error_code)
+int on_destroy(void *param)
 {
-	ft_putendl_fd (strerr, 2);
-	exit (error_code);
+	t_fdf	*fdf;
+
+	fdf = (t_fdf *) param;
+		free (fdf->data);
+	exit (0);
+}
+
+int	key_hook(int keycode, void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = (t_fdf *) param;
+	if (keycode == 53)
+	{
+		mlx_destroy_window (fdf->mlx, fdf->win);	
+		on_destroy (fdf);
+	}
+	ft_printf ("Hello from key_hook!: %d\n", keycode);
+	return (0);
 }
