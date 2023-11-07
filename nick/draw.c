@@ -32,11 +32,11 @@ void	bresenham(double x, double y, double x1, double y1, t_fdf *data)
 	y1 *= data->zoom;
 
 	/* 3D */
-	isometric (&x, &y, z, 0.8);
-	isometric (&x1, &y1, z1, 0.8);
+	isometric (&x, &y, z, 1);
+	isometric (&x1, &y1, z1, 1);
 
 	/* shift */
-	int shift = 250;
+	int shift = 170;
 	x += shift;
 	y += shift;
 	x1 += shift;
@@ -53,8 +53,8 @@ void	bresenham(double x, double y, double x1, double y1, t_fdf *data)
 
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put (data->mlx_ptr, data->win_ptr, (int)x, (int)y, color);
-		// my_mlx_pixel_put (data, x, y, 0xFFFFFF);
+		// mlx_pixel_put (data->mlx_ptr, data->win_ptr, (int)x, (int)y, color);
+		my_mlx_pixel_put (data, (int)round(x), (int)round(y), color);
 		x += x_step;
 		y += y_step;
 	}

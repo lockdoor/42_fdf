@@ -6,7 +6,7 @@
 #    By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 17:14:20 by pnamnil           #+#    #+#              #
-#    Updated: 2023/11/06 15:11:16 by pnamnil          ###   ########.fr        #
+#    Updated: 2023/11/07 11:47:51 by pnamnil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,10 @@ CFLAGS = -Wall -Werror -Wextra
 FRAMEWORK = -framework OpenGL -framework AppKit
 LINK_LIB = -L$(MINILIBX_PATH) -lmlx -L$(LIBFT_PATH) -lft
 
-# SRCS = $(addprefix src/, fdf.c fdf_read_file.c fdf_add_data.c fdf_utils.c\
-# 		fdf_draw_image.c fdf_free.c fdf_key_hook.c debug.c)
+SRCS = $(addprefix src/, fdf.c fdf_read_file.c fdf_add_data.c fdf_utils.c\
+		fdf_draw_image.c fdf_bresenham.c fdf_free.c fdf_key_hook.c debug.c)
 
-SRCS = $(addprefix nick/, fdf.c readfile.c draw.c)
+# SRCS = $(addprefix nick/, fdf.c readfile.c draw.c)
 OBJS = $(SRCS:%.c=%.o)
 
 FILE_TEST = resource/test_maps/42.fdf

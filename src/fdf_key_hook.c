@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 10:21:57 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/05 10:22:29 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/07 10:57:48 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int on_destroy(void *param)
 	t_fdf	*fdf;
 
 	fdf = (t_fdf *) param;
-		free (fdf->data);
+		fdf_free_data (fdf->data);
 	exit (0);
 }
 

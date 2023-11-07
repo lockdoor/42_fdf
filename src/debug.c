@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 15:55:47 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/04 11:58:54 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/07 10:29:59 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_data_debug(t_fdf *fdf)
 		j = 0;
 		while (j < fdf->col)
 		{
-			ft_printf ("%3d", fdf->data[(i * fdf->col) + j].adj);
+			ft_printf ("%3d", fdf->data[i][j].adj);
 			j++ ;
 		}
 		ft_printf ("\n");

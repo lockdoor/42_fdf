@@ -6,29 +6,29 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:14:40 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/06 12:48:27 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/07 11:18:52 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	mouse_event(int button, int x, int y, void *param)
-{
-	t_fdf	*fdf;
+// int	mouse_event(int button, int x, int y, void *param)
+// {
+// 	t_fdf	*fdf;
 
-	(void)	button;
-	fdf = (t_fdf *) param;
-	ft_printf ("x: %d, y: %d\n", x, y);
-	ft_printf ("x: ", fdf->win);
-	return (0);
-}
+// 	(void)	button;
+// 	fdf = (t_fdf *) param;
+// 	ft_printf ("x: %d, y: %d\n", x, y);
+// 	ft_printf ("x: ", fdf->win);
+// 	return (0);
+// }
 
-int	expose_event(void *param)
-{
-	(void) param;
-	ft_printf ("expose event\n");
-	return (0);
-}
+// int	expose_event(void *param)
+// {
+// 	(void) param;
+// 	ft_printf ("expose event\n");
+// 	return (0);
+// }
 
 int	main(int argc, char **argv)
 {
@@ -49,13 +49,17 @@ int	main(int argc, char **argv)
 	fdf.win = mlx_new_window(fdf.mlx, 800, 800, fdf.filename);
 	fdf.img = mlx_new_image(fdf.mlx, 800, 800);
 	fdf.addr = mlx_get_data_addr(fdf.img, &fdf.bpp, &fdf.line_length, &fdf.endian);
+
+	/* draw image */
+	fdf.zoom = 30;
+	fdf.shift = 170;
 	fdf_draw_image (&fdf);
 	mlx_put_image_to_window(fdf.mlx, fdf.win, fdf.img, 0, 0);
 	
 
 	/* hook */
 	mlx_hook (fdf.win, ON_KEYUP, 0, key_hook, &fdf);
-	mlx_hook (fdf.win, 5, 0, mouse_event, &fdf);
+	// mlx_hook (fdf.win, 5, 0, mouse_event, &fdf);
 	mlx_hook (fdf.win, ON_DESTROY, 0, on_destroy, &fdf);
 
 	
