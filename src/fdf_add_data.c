@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 10:52:22 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/05 13:34:22 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/06 09:30:06 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void fdf_add_col(char *line, t_fdf *fdf, size_t row, int fd)
 			fdf_exit_error (WRONG_LINE, EXIT_FAILURE);
 		}
 		fdf->data[(row * fdf->col) + col].adj = ft_atoi (split[col]);
+		fdf->data[(row * fdf->col) + col].color = 0;
 		col++ ;
 	}
 	fdf_free_split (split);	

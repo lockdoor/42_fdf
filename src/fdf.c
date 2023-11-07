@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:14:40 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/05 13:40:42 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/06 12:48:27 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	main(int argc, char **argv)
 
 	/* prepair window and image */
 	fdf.mlx = mlx_init();
-	fdf.win = mlx_new_window(fdf.mlx, 400, 400, fdf.filename);
-	fdf.img = mlx_new_image(fdf.mlx, 400, 400);
+	fdf.win = mlx_new_window(fdf.mlx, 800, 800, fdf.filename);
+	fdf.img = mlx_new_image(fdf.mlx, 800, 800);
 	fdf.addr = mlx_get_data_addr(fdf.img, &fdf.bpp, &fdf.line_length, &fdf.endian);
 	fdf_draw_image (&fdf);
 	mlx_put_image_to_window(fdf.mlx, fdf.win, fdf.img, 0, 0);

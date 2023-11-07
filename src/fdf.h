@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:10:16 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/05 14:40:32 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/06 12:38:45 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,19 @@ typedef struct s_fdf
 	size_t		col;
 	size_t		row;
 	size_t		zoom;
+	float		angle;
 }	t_fdf;
+
+typedef struct s_fdf_line
+{
+	float	x_1;
+	float	y_1;
+	float	x_2;
+	float	y_2;
+	float	dx;
+	float	dy;
+	size_t	step;
+}	t_fdf_line;
 
 enum 
 {
