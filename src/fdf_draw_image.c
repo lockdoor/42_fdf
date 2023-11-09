@@ -6,21 +6,11 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:36:52 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/07 11:40:58 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/08 15:43:50 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static int	fdf_set_color(t_fdf *fdf, int x, int y)
-{
-	if (fdf->data[y][x].color)
-		return (fdf->data[y][x].color);
-	else if (fdf->data[y][x].adj)
-		return (0xFF0000);
-	else
-		return (0xFFFFFF);
-}
 
 static void	fdf_set_line(t_fdf_line *line, int x, int y, t_bool mode)
 {
@@ -36,19 +26,27 @@ static void	fdf_set_line(t_fdf_line *line, int x, int y, t_bool mode)
 
 static void	fdf_draw(t_fdf *fdf, t_fdf_line *line, int x, int y)
 {
-	int	color;
-			
-	color = fdf_set_color (fdf, x, y);
-	if (x < fdf->col - 1)
+	if (x < (int)fdf->col - 1)
 	{
 		fdf_set_line (line, x, y, TRUE);
-		fdf_bresenham (line, fdf, color);
+		fdf_bresenham (line, fdf);
 	}
-	if (y < fdf->row - 1)
+	if (y < (int)fdf->row - 1)
 	{
 		fdf_set_line (line, x, y, FALSE);
-		fdf_bresenham (line, fdf, color);
+		fdf_bresenham (line, fdf);
 	}
+}
+
+void	menu(t_fdf *fdf)
+{
+	/* menu */
+	mlx_string_put (fdf->mlx, fdf->win, 10, 10, 0xFFFFFFF, "Menu");
+	mlx_string_put (fdf->mlx, fdf->win, 10, 30, 0xFFFFFFF, "Control");
+	mlx_string_put (fdf->mlx, fdf->win, 10, 70, 0xFFFFFFF, "3D: I");
+	mlx_string_put (fdf->mlx, fdf->win, 10, 100, 0xFFFFFFF, "2D: P");
+	mlx_string_put (fdf->mlx, fdf->win, 10, 130, 0xFFFFFFF, "Transfrom: Arrow");
+	mlx_string_put (fdf->mlx, fdf->win, 10, 170, 0xFFFFFFF, "Height: [1], [2]");
 }
 
 void	fdf_draw_image(t_fdf *fdf)
@@ -57,6 +55,7 @@ void	fdf_draw_image(t_fdf *fdf)
 	size_t		x;
 	size_t		y;
 
+	ft_bzero (fdf->addr, fdf->width * fdf->height * (fdf->bpp / 8));
 	y = 0;
 	while (y < fdf->row)
 	{
@@ -68,4 +67,6 @@ void	fdf_draw_image(t_fdf *fdf)
 		}
 		y++ ;
 	}
+	menu(fdf);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, fdf->menu_x, 0);
 }

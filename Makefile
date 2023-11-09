@@ -6,7 +6,7 @@
 #    By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 17:14:20 by pnamnil           #+#    #+#              #
-#    Updated: 2023/11/07 11:47:51 by pnamnil          ###   ########.fr        #
+#    Updated: 2023/11/08 15:24:42 by pnamnil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,14 @@ SRCS = $(addprefix src/, fdf.c fdf_read_file.c fdf_add_data.c fdf_utils.c\
 # SRCS = $(addprefix nick/, fdf.c readfile.c draw.c)
 OBJS = $(SRCS:%.c=%.o)
 
+# FILE_TEST = resource/test_maps/mars.fdf
+# FILE_TEST = resource/test_maps/pyramide.fdf
 FILE_TEST = resource/test_maps/42.fdf
 # FILE_TEST = empty_file
+# FILE_TEST = resource/test_maps/t1.fdf
 
 %.o: %.c
-	$(CC)  -I$(MINILIBX_PATH) -I$(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MINILIBX_PATH) -I$(INCLUDES) -c $< -o $@
 
 all: $(NAME)
 	./$(NAME) $(FILE_TEST)
@@ -45,7 +48,7 @@ v:
 $(NAME): $(OBJS)
 	$(MAKE) -C $(MINILIBX_PATH)
 	$(MAKE) -C $(LIBFT_PATH)
-	$(CC)  $(OBJS) $(LINK_LIB) $(FRAMEWORK) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LINK_LIB) $(FRAMEWORK) -o $(NAME)
 
 # $(NAME): $(OBJS)
 # 	$(MAKE) -C $(LIBFT_PATH)

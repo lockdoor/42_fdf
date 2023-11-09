@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:22:31 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/07 10:27:26 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/08 12:47:58 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void fdf_free_data (t_fdf *fdf)
 	if (!data)
 		return ;
 	i = 0;
-	while (data[i] && i < fdf->row)
+	while (data[i] && i < (int)fdf->row)
 	{
 		free (data[i]);
 		data[i] = NULL;
