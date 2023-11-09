@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:10:16 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/08 15:27:21 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:10:38 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@
 # define KEY_RIGHT 124
 # define KEY_1 18
 # define KEY_2 19
+# define KEY_PLUS 24
+# define KEY_MINUS 27
+# define KEY_0 29
+# define KEY_9 25
 
 typedef struct s_fdata
 {

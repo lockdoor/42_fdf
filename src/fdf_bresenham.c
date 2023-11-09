@@ -6,12 +6,13 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:38:19 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/08 15:27:09 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/09 12:02:00 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/* fdf->bpp = 32, 32 bit RGBA color */
 static void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
 {
 	char	*dst;
@@ -22,11 +23,26 @@ static void	my_mlx_pixel_put(t_fdf *fdf, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
+/* default */
+// static void	fdf_isometric(float *x, float *y, int z, float angle)
+// {
+// 	*x = (*x - *y) * cos(angle);
+// 	*y = ((*x + *y) * sin(angle)) - z;
+// }
+
 static void	fdf_isometric(float *x, float *y, int z, float angle)
 {
+	float temp = *x;
 	*x = (*x - *y) * cos(angle);
-	*y = ((*x + *y) * sin(angle)) - z;
+	*y = ((temp + *y) * sin(angle)) - z;
 }
+
+// static void	fdf_isometric(float *x, float *y, int z, float angle)
+// {
+// 	float temp = *y;
+// 	*y = (*y - *x) * cos(angle);
+// 	*x = ((temp + *x) * sin(angle)) - z;
+// }
 
 static void	fdf_zoom(t_fdf_line *line, t_fdf *fdf)
 {
@@ -38,10 +54,17 @@ static void	fdf_zoom(t_fdf_line *line, t_fdf *fdf)
 
 static void	fdf_offset(t_fdf_line *line, t_fdf *fdf)
 {
-	line->x_1 += fdf->offset_x;
-	line->y_1 += fdf->offset_y;
-	line->x_2 += fdf->offset_x;
-	line->y_2 += fdf->offset_y;
+	if (fdf->isometric)
+	{
+		// if (line->x_1 < 0)
+		// 	fdf->offset_x = (int) fabs(line->x_1);
+		// if (line->y_1 < 0)
+		// 	fdf->offset_y = (int) fabs(line->y_1);
+		line->x_1 += fdf->offset_x;
+		line->y_1 += fdf->offset_y;
+		line->x_2 += fdf->offset_x;
+		line->y_2 += fdf->offset_y;
+	}
 }
 
 int	gradient(t_fdf_line *line, int i)
@@ -101,7 +124,7 @@ void	fdf_bresenham(t_fdf_line *line, t_fdf *fdf)
 	// while ((int)(line->x_1 - line->x_2) || (int)(line->y_1 - line->y_2))
 	while (++i < (int)line->step)
 	{
-			my_mlx_pixel_put(fdf, line->x_1, line->y_1, gradient(line, i + 1));
+		my_mlx_pixel_put(fdf, line->x_1, line->y_1, gradient(line, i + 1));
 		line->x_1 += line->dx;
 		line->y_1 += line->dy;
 	}

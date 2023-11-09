@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 13:36:52 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/08 15:43:50 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/09 11:11:58 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,6 @@ static void	fdf_draw(t_fdf *fdf, t_fdf_line *line, int x, int y)
 	}
 }
 
-void	menu(t_fdf *fdf)
-{
-	/* menu */
-	mlx_string_put (fdf->mlx, fdf->win, 10, 10, 0xFFFFFFF, "Menu");
-	mlx_string_put (fdf->mlx, fdf->win, 10, 30, 0xFFFFFFF, "Control");
-	mlx_string_put (fdf->mlx, fdf->win, 10, 70, 0xFFFFFFF, "3D: I");
-	mlx_string_put (fdf->mlx, fdf->win, 10, 100, 0xFFFFFFF, "2D: P");
-	mlx_string_put (fdf->mlx, fdf->win, 10, 130, 0xFFFFFFF, "Transfrom: Arrow");
-	mlx_string_put (fdf->mlx, fdf->win, 10, 170, 0xFFFFFFF, "Height: [1], [2]");
-}
-
 void	fdf_draw_image(t_fdf *fdf)
 {
 	t_fdf_line	line;
@@ -67,6 +56,5 @@ void	fdf_draw_image(t_fdf *fdf)
 		}
 		y++ ;
 	}
-	menu(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, fdf->menu_x, 0);
 }

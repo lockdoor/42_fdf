@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 10:21:57 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/08 10:48:34 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:13:34 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,24 @@ void	modify_height(int keycode, t_fdf *fdf)
 	fdf_draw_image (fdf);
 }
 
+void	zoom(int keycode, t_fdf *fdf)
+{
+	if (keycode == KEY_PLUS)
+		fdf->zoom += 1;
+	if (keycode == KEY_MINUS && fdf->zoom > 1)
+		fdf->zoom -= 1;
+	fdf_draw_image (fdf);
+}
+
+void	change_angle(int keycode, t_fdf *fdf)
+{
+	if (keycode == KEY_0)
+		fdf->angle += 0.1;
+	if (keycode == KEY_9)
+		fdf->angle -= 0.1;
+	fdf_draw_image (fdf);
+}
+
 int	key_hook(int keycode, void *param)
 {
 	t_fdf	*fdf;
@@ -70,6 +88,10 @@ int	key_hook(int keycode, void *param)
 		transform (keycode, fdf);
 	if (keycode == KEY_1 || keycode == KEY_2)
 		modify_height (keycode, fdf);
+	if (keycode == KEY_PLUS || keycode == KEY_MINUS)
+		zoom (keycode, fdf);
+	if (keycode == KEY_0 || keycode == KEY_9)
+		change_angle (keycode, fdf);
 	ft_printf ("Hello from key_hook!: %d\n", keycode);
 	return (0);
 }
