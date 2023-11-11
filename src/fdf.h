@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:10:16 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/11 10:13:19 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/11 11:11:36 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int		on_destroy(void *param);
 void	fdf_transform(int keycode, t_fdf *fdf);
 void	fdf_projection_mode(int keycode, t_fdf *fdf);
 void	fdf_modify_height(int keycode, t_fdf *fdf);
-void	fdf_zoom(int keycode, t_fdf *fdf);
+void	fdf_change_zoom(int keycode, t_fdf *fdf);
 void	fdf_change_angle(int keycode, t_fdf *fdf);
 
 #endif

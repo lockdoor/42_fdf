@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:10:26 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/11 10:16:37 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/11 11:11:28 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	fdf_modify_height(int keycode, t_fdf *fdf)
 	fdf_draw_image (fdf);
 }
 
-void	fdf_zoom(int keycode, t_fdf *fdf)
+void	fdf_change_zoom(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_PLUS)
 		fdf->zoom += 1;
