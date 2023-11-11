@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:10:16 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/09 10:10:38 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/11 10:13:19 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,29 @@ typedef struct s_fdata
 	int	color;
 }	t_fdata;
 
-
 typedef struct s_fdf
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_length;
-	int			endian;
-	struct s_fdata		**data;
-	char		*pname;
-	char		*filename;
-	size_t		col;
-	size_t		row;
-	size_t		zoom;
-	size_t		menu_x;
-	int		offset_x;
-	int		offset_y;
-	float		angle;
-	int			adj;
-	size_t		width;
-	size_t		height;
-	t_bool		isometric;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
+	struct s_fdata	**data;
+	char			*pname;
+	char			*filename;
+	size_t			col;
+	size_t			row;
+	size_t			zoom;
+	size_t			menu_x;
+	int				offset_x;
+	int				offset_y;
+	float			angle;
+	int				adj;
+	size_t			width;
+	size_t			height;
+	t_bool			isometric;
 }	t_fdf;
 
 typedef struct s_fdf_line
@@ -96,20 +95,18 @@ typedef struct s_fdf_line
 	int		c_2;
 }	t_fdf_line;
 
-
-
-
 // debug.c
 void	print_data_debug(t_fdf *fdf);
 void	print_split(char **split);
 
 // fdf_utils.c
 void	fdf_exit_error(char *strerr, int error_code);
+void	fdf_exit_error_fd(char *msg, int fd, t_fdf *fdf);
 int		ft_atoi_base(char *s);
 
 // fdf_free.c
 void	fdf_free_split(void *data);
-void	fdf_free_data (t_fdf *fdf);
+void	fdf_free_data(t_fdf *fdf);
 
 // fdf_read_file.c
 void	fdf_read_file(t_fdf *fdf);
@@ -123,8 +120,18 @@ void	fdf_draw_image(t_fdf *fdf);
 // fdf_bresenham.c
 void	fdf_bresenham(t_fdf_line *line, t_fdf *fdf);
 
+// fdf_gradient.c
+int		fdf_gradient(t_fdf_line *line, int i);
+
 // fdf_key_hook.c
-int	key_hook(int keycode, void *param);
-int on_destroy(void *param);
+int		key_hook(int keycode, void *param);
+int		on_destroy(void *param);
+
+// fdf_control.c
+void	fdf_transform(int keycode, t_fdf *fdf);
+void	fdf_projection_mode(int keycode, t_fdf *fdf);
+void	fdf_modify_height(int keycode, t_fdf *fdf);
+void	fdf_zoom(int keycode, t_fdf *fdf);
+void	fdf_change_angle(int keycode, t_fdf *fdf);
 
 #endif

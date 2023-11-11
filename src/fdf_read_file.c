@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:50:12 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/07 11:44:32 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/11 10:19:42 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	fdf_count_col(t_fdf *fdf)
 	fd = open (fdf->filename, O_RDONLY);
 	if (fd == -1)
 		fdf_exit_error (INVALID_FILE, EXIT_FAILURE);
-	line = get_next_line(fd);
+	line = get_next_line (fd);
 	if (!line)
 	{
 		close (fd);

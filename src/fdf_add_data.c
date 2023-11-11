@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 10:52:22 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/08 15:22:59 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/11 10:22:34 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@ static void	fdf_rm_newline(char *line)
 		*nl = 0;
 }
 
-static void fdf_exit_error_fd(char *msg, int fd, t_fdf *fdf)
-{
-	close (fd);
-	fdf_free_data (fdf);
-	fdf_exit_error (msg, EXIT_FAILURE);
-}
-
-static t_bool fdf_get_data(char *data, t_fdf *fdf, size_t row, size_t col)
+static t_bool	fdf_get_data(char *data, t_fdf *fdf, size_t row, size_t col)
 {
 	char	**split;
 
@@ -39,12 +32,7 @@ static t_bool fdf_get_data(char *data, t_fdf *fdf, size_t row, size_t col)
 	{
 		fdf->data[row][col].adj = ft_atoi(split[0]);
 		if (split[1])
-		{
 			fdf->data[row][col].color = ft_atoi_base(split[1]);
-			
-			// debug
-			// ft_printf ("color: %d\n", fdf->data[row][col].color);
-		}
 		else
 			fdf->data[row][col].color = 0;
 	}
@@ -120,5 +108,5 @@ void	fdf_add_data(t_fdf *fdf)
 			fdf_exit_error (MALLOC_ERROR, EXIT_FAILURE);
 		}
 	}
-	fdf_read_data(fdf);
+	fdf_read_data (fdf);
 }

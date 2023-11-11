@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:11:31 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/08 15:01:30 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/11 10:19:18 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,16 @@ void	fdf_exit_error(char *strerr, int error_code)
 	exit (error_code);
 }
 
+void	fdf_exit_error_fd(char *msg, int fd, t_fdf *fdf)
+{
+	close (fd);
+	fdf_free_data (fdf);
+	fdf_exit_error (msg, EXIT_FAILURE);
+}
+
 static int	find_index(char *base, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (base[i])
@@ -34,9 +41,9 @@ static int	find_index(char *base, char c)
 
 int	ft_atoi_base(char *s)
 {
-	int n;
-	char *base;
-	int idx;
+	int		n;
+	char	*base;
+	int		idx;
 
 	n = 0;
 	base = "0123456789ABCDEF";
@@ -49,7 +56,7 @@ int	ft_atoi_base(char *s)
 	s += 2 ;
 	while (*s)
 	{
-		idx = find_index(base, *s);
+		idx = find_index (base, *s);
 		if (idx == -1)
 			break ;
 		n = (n * 16) + idx;

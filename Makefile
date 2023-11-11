@@ -6,7 +6,7 @@
 #    By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 17:14:20 by pnamnil           #+#    #+#              #
-#    Updated: 2023/11/09 09:56:29 by pnamnil          ###   ########.fr        #
+#    Updated: 2023/11/11 10:23:29 by pnamnil          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ FRAMEWORK = -framework OpenGL -framework AppKit
 LINK_LIB = -L$(MINILIBX_PATH) -lmlx -L$(LIBFT_PATH) -lft
 
 SRCS = $(addprefix src/, fdf.c fdf_read_file.c fdf_add_data.c fdf_utils.c\
-		fdf_draw_image.c fdf_bresenham.c fdf_free.c fdf_key_hook.c debug.c)
+		fdf_draw_image.c fdf_bresenham.c fdf_gradient.c fdf_free.c\
+		fdf_key_hook.c fdf_control.c debug.c)
 
 # SRCS = $(addprefix nick/, fdf.c readfile.c draw.c)
 OBJS = $(SRCS:%.c=%.o)
