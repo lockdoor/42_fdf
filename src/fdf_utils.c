@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 11:11:31 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/11 10:19:18 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/15 08:34:15 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,11 @@ int	ft_atoi_base(char *s)
 		s++ ;
 	}
 	return (n);
+}
+
+int	fdf_percent(int n, int p)
+{
+	if (n * p <= 100)
+		return (n);
+	return (n * p / 100);
 }

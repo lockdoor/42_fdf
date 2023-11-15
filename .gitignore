@@ -5,3 +5,4 @@ fdf
 *.tgz
 resource/minilibx
 fdf.dSYM
+.vscode

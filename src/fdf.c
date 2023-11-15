@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 10:14:40 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/11 10:18:57 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/15 08:19:24 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	init_fdf(t_fdf *fdf, char **argv)
 	fdf->filename = argv[1];
 	fdf->adj = 1;
 	fdf->isometric = FALSE;
-	fdf->angle = 1;
+	fdf->angle = 0.6;
 	fdf->zoom = 1;
-	fdf->offset_x = 250;
-	fdf->offset_y = 170;
+	fdf->offset_x = 0;
+	fdf->offset_y = 0;
 	fdf->menu_x = 200;
 	fdf->width = 1200;
 	fdf->height = 800;

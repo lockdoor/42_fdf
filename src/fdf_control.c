@@ -6,7 +6,7 @@
 /*   By: pnamnil <pnamnil@student.42bangkok.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 10:10:26 by pnamnil           #+#    #+#             */
-/*   Updated: 2023/11/11 11:11:28 by pnamnil          ###   ########.fr       */
+/*   Updated: 2023/11/15 08:34:11 by pnamnil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ void	fdf_transform(int keycode, t_fdf *fdf)
 void	fdf_projection_mode(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_I)
+	{
+		fdf->offset_x = fdf_percent(fdf->width, 45);
+		fdf->offset_y = fdf_percent(fdf->height, 15);
+		fdf->zoom = fdf_percent(fdf->zoom, 25);
 		fdf->isometric = TRUE;
+	}
 	if (keycode == KEY_P)
 		fdf->isometric = FALSE;
 	fdf_draw_image (fdf);
